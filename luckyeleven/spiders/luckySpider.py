@@ -2,17 +2,14 @@ import scrapy
 
 
 class BlogSpider(scrapy.Spider):
-    name = 'blogspider'
-    start_urls = ['http://11xuan5.cjcp.com.cn/guangdong/kaijiang/']
+    name = 'lucklySpider'
+    start_urls = ['https://www.jsh365.com/award/gp-gdsyxu/2019-03-06.html']
 
     def parse(self, response):
-        i = 0
-        for tr in response.css('.kjjg_table>tr'):
-            print('')
-            for td in tr.css('td'):
-                items = td.css('.kjjg_hm_bg')
-                if len(items) == 0:
-                    print(td.css('::text').get()),
+        for tab in response.css('._tab'):
+            i = 0
+            for item in tab.css('tr>td>div'):
+                if i == 0:
+                    print(item.css('::text').get())
                 else:
-                    for item in items.css('.hm_bg ::text'):
-                        print(item.get()),
+                    print(item.css('::text').get()),
