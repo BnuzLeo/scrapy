@@ -5,7 +5,9 @@ from luckyeleven.items import Result
 
 class BlogSpider(scrapy.Spider):
     name = 'lucklySpider'
-    start_urls = ['https://www.jsh365.com/award/gp-gdsyxu/2019-03-06.html',
+    start_urls = ['https://www.jsh365.com/award/gp-gdsyxu/2019-03-08.html',
+                  'https://www.jsh365.com/award/gp-gdsyxu/2019-03-07.html',
+                  'https://www.jsh365.com/award/gp-gdsyxu/2019-03-06.html',
                   'https://www.jsh365.com/award/gp-gdsyxu/2019-03-05.html',
                   'https://www.jsh365.com/award/gp-gdsyxu/2019-03-04.html',
                   'https://www.jsh365.com/award/gp-gdsyxu/2019-03-03.html',
@@ -27,4 +29,4 @@ class BlogSpider(scrapy.Spider):
                 result['number'] = []
                 for div in item.css('td')[2].css('div'):
                     result['number'].append(div.css('::text').get())
-                print result
+                yield result

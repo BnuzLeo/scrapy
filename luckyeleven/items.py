@@ -13,6 +13,7 @@ class LuckyelevenItem(scrapy.Item):
     # name = scrapy.Field()
     pass
 
+
 class Result(scrapy.Item):
     date = scrapy.Field()
     item = scrapy.Field()
