@@ -1,5 +1,7 @@
 import scrapy
 
+from luckyeleven.items import Result
+
 
 class BlogSpider(scrapy.Spider):
     name = 'lucklySpider'
@@ -14,10 +16,15 @@ class BlogSpider(scrapy.Spider):
     def parse(self, response):
         print(response.url)
         for tab in response.css('._tab'):
-            i = 1
-            for item in tab.css('tr>td>div'):
-                if i % 6 == 0:
-                    print(item.css('::text').get())
-                else:
-                    print(item.css('::text').get()),
-                i = i + 1
+            for item in tab.css('tr'):
+                if len(item.css('td')) == 0:
+                    continue
+                result = Result()
+                url = response.url
+                result['date'] = url[url.find('u/') + 2:url.find('.html')]
+                result['item'] = item.css('td')[0].css('div::text').get()
+                result['time'] = item.css('td')[1].css('::text').get()
+                result['number'] = []
+                for div in item.css('td')[2].css('div'):
+                    result['number'].append(div.css('::text').get())
+                print result
