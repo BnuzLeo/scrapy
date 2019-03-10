@@ -32,8 +32,9 @@ class insertToDBPipeline(object):
     def process_item(self, item, spider):
         try:
             self.cursor.execute(
-                "insert into result(date,item,time,number) value (%s,%s,%s,%s)",
-                (item['date'], item['item'], item['time'], ','.join(item['number']))
+                "insert into result(date,item,time,num1,num2,num3,num4,num5) value (%s,%s,%s,%s,%s,%s,%s,%s)",
+                (item['date'], item['item'], item['time'], item['num1'], item['num2'], item['num3'], item['num4'],
+                 item['num5'])
             )
 
             self.connect.commit()

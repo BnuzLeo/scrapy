@@ -18,5 +18,9 @@ class Result(scrapy.Item):
     date = scrapy.Field()
     item = scrapy.Field()
     time = scrapy.Field()
-    number = scrapy.Field()
+    num1 = scrapy.Field()
+    num2 = scrapy.Field()
+    num3 = scrapy.Field()
+    num4 = scrapy.Field()
+    num5 = scrapy.Field()
     pass

@@ -24,9 +24,11 @@ class BlogSpider(scrapy.Spider):
                 result = Result()
                 url = response.url
                 result['date'] = url[url.find('u/') + 2:url.find('.html')]
-                result['item'] = item.css('td')[0].css('div::text').get()
+                result['item'] = int(item.css('td')[0].css('div::text').get())
                 result['time'] = item.css('td')[1].css('::text').get()
-                result['number'] = []
+                i = 0
                 for div in item.css('td')[2].css('div'):
-                    result['number'].append(div.css('::text').get())
+                    i = i + 1
+                    index = 'num' + str(i)
+                    result[index] = int(div.css('::text').get())
                 yield result
